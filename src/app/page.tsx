@@ -1,6 +1,6 @@
 "use client";
 
-import { NeynarFeedList, useNeynarContext } from "@neynar/react";
+import { NeynarAuthButton, NeynarFeedList, useNeynarContext } from "@neynar/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -37,7 +37,6 @@ export default function Home() {
 
   const submitCast = async () => {
     if (user && user.signer_uuid) {
-
       const response = await fetch("/api/casts", {
         method: "POST",
         body: JSON.stringify({
@@ -73,6 +72,7 @@ export default function Home() {
             </button>
           </div>
           <nav className="mt-10 space-y-4">
+            <NeynarAuthButton className="right-4 top-4" />
             <Link href="/" className="flex items-center gap-3 text-lg hover:text-purple-400">
               <span>🏠</span> Home
             </Link>
