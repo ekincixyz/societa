@@ -11,6 +11,8 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedChannel, setSelectedChannel] = useState("");
   const [castText, setCastText] = useState("");
+  const [feedSearched, setFeedSearched] = useState(false);
+  const [feed, setFeed] = useState<any>();
 
   const fetchChannels = async () => {
     const channels = SOLANA_CHANNELS.join(',');
@@ -23,6 +25,15 @@ export default function Home() {
   useEffect(() => {
     if (!channels) fetchChannels();
   }, [channels]);
+
+  useEffect(() => {
+    if (!feedSearched) {
+      setFeedSearched(true);
+      fetch("/api/feed")
+        .then((response) => response.json())
+        .then((data) => setFeed(data));
+    }
+  }, [feedSearched]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -107,6 +118,63 @@ export default function Home() {
             placeholder="What's happening?"
             className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none"
           />
+        </div>
+
+        <div className="space-y-4">
+          {feed && feed.casts && feed.casts.map((cast: any) => (
+            <div key={cast.hash} className="p-4 bg-gray-900 rounded-lg">
+            <div className="flex items-center mb-4">
+              <img 
+                src={cast.author.pfp_url} 
+                alt={cast.author.display_name} 
+                className="w-12 h-12 rounded-full" 
+              />
+              <div className="ml-3">
+                <p className="font-bold text-white">{cast.author.display_name}</p>
+                <p className="text-sm text-gray-400">@{cast.author.username}</p>
+              </div>
+            </div>
+
+            <p className="mb-3 text-white text-lg">{cast.text}</p>
+
+            {cast.embeds && cast.embeds.length > 0 && (
+              <div className="mb-3">
+                <img
+                  src={cast.embeds[0].url}
+                  alt="Embedded media"
+                  className="rounded-lg w-full max-h-96 object-cover"
+                />
+              </div>
+            )}
+
+            <div className="flex justify-between items-center text-gray-400 text-sm">
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-1">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 9l-5 5m0 0l5 5m-5-5H5"></path>
+                  </svg>
+                  <span>{cast.replies.count}</span>
+                </div>
+
+                <div className="flex items-center space-x-1">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                  <span>{cast.reactions.recasts_count}</span>
+                </div>
+
+                <div className="flex items-center space-x-1">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7"></path>
+                  </svg>
+                  <span>{cast.reactions.likes_count}</span>
+                </div>
+              </div>
+
+              <span className="text-gray-500">/{cast.channel?.name}</span>
+            </div>
+          </div>
+          ))}
         </div>
 
         <div className="space-y-4">
