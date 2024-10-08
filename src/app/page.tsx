@@ -1,8 +1,10 @@
 "use client";
 
 import { NeynarAuthButton, NeynarFeedList, useNeynarContext } from "@neynar/react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { SOLANA_CHANNELS } from "./consts/channels"
+import Sidebar from "../components/Sidebar";
+import Link from "next/link";
 
 export default function Home() {
   const { user } = useNeynarContext();
@@ -12,16 +14,16 @@ export default function Home() {
   const [castText, setCastText] = useState("");
 
   const fetchChannels = async () => {
-    if (!user) return;
+    const channels = SOLANA_CHANNELS.join(',');
 
-    const response = await fetch(`/api/channels?fid=${user?.fid}`);
+    const response = await fetch(`/api/bulkChannels?channels=${channels}`);
     const data = await response.json();
     setChannels(data);
   };
 
   useEffect(() => {
-    if (user) fetchChannels();
-  }, [user]);
+    if (!channels) fetchChannels();
+  }, [channels]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -73,15 +75,19 @@ export default function Home() {
           </div>
           <nav className="mt-10 space-y-4">
             <NeynarAuthButton className="right-4 top-4" />
-            <Link href="/" className="flex items-center gap-3 text-lg hover:text-purple-400">
-              <span>🏠</span> Home
-            </Link>
-            <Link href="/explore" className="flex items-center gap-3 text-lg hover:text-purple-400">
-              <span>🔍</span> Explore
-            </Link>
-            <Link href="/profile" className="flex items-center gap-3 text-lg hover:text-purple-400">
-              <span>👤</span> Profile
-            </Link>
+            {channels?.channels && channels.channels.length > 0 ? (
+              channels.channels.map((channel) => (
+                <Link
+                  key={channel.id}
+                  href={`/channel/${encodeURIComponent(channel.name)}`}
+                  className="flex items-center gap-3 text-lg hover:text-purple-400"
+                >
+                  <img src={channel.image_url} alt={channel.name} className="w-10 h-10 rounded-full" />
+                  <span>{channel.name}</span>
+                </Link>
+              ))
+            ) : <></>
+            }
           </nav>
         </div>
       </aside>
