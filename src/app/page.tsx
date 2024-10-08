@@ -3,7 +3,6 @@
 import { NeynarAuthButton, NeynarFeedList, useNeynarContext } from "@neynar/react";
 import { useEffect, useState } from "react";
 import { SOLANA_CHANNELS } from "./consts/channels"
-import Sidebar from "../components/Sidebar";
 import Link from "next/link";
 
 export default function Home() {
