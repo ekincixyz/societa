@@ -3,6 +3,7 @@ export const SOLANA_CHANNELS = [
   "solana",
   "superteam",
   "colosseum",
+  "depin",
   "rust",
   "trident",
   "school-of-solana",
