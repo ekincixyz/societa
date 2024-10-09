@@ -58,13 +58,18 @@ export default function Home() {
     }
   }
 
+  const handleInvite = async () => {
+    const text = 'Join me on societal: https://societa.app/';
+
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+  }
+
   return (
     <div className="flex min-h-screen text-white bg-gray-900">
       <aside className="w-64 p-4 bg-gray-800 flex flex-col justify-between">
         <div className="space-y-6">
           <h1 className="text-xl font-bold">Farcaster</h1>
           <nav className="mt-10 space-y-4">
-            <NeynarAuthButton className="right-4 top-4" />
             {channels?.channels && channels.channels.length > 0 ? (
               channels.channels.map((channel) => (
                 <Link
@@ -104,16 +109,12 @@ export default function Home() {
 
       <aside className="w-64 p-4 bg-gray-800 flex flex-col">
         <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Search Farcaster"
-            className="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none w-full"
-          />
+          <NeynarAuthButton className="right-4 top-4" />
 
           <div className="bg-gray-700 p-4 rounded-lg">
             <h2 className="text-lg font-bold mb-2">Invite friends to Farcaster</h2>
             <p>Send your friend a link to signup or gift them an invitation to join for free.</p>
-            <button className="bg-purple-600 mt-4 px-4 py-2 rounded-lg w-full">
+            <button className="bg-purple-600 mt-4 px-4 py-2 rounded-lg w-full" onClick={handleInvite}>
               Get Invite Link
             </button>
           </div>
