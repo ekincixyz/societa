@@ -59,7 +59,7 @@ export default function Home() {
   }
 
   const handleInvite = async () => {
-    const text = 'Join me on societal: https://societa.app/';
+    const text = 'Join me on @societaapp the Farcaster client for Solana Builders, find me on the /societa channel!';
 
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
   }
@@ -68,7 +68,7 @@ export default function Home() {
     <div className="flex min-h-screen text-white bg-gray-900">
       <aside className="w-64 p-4 bg-gray-800 flex flex-col justify-between">
         <div className="space-y-6">
-          <h1 className="text-xl font-bold">Farcaster</h1>
+          <h1 className="text-xl font-bold">Societa</h1>
           <nav className="mt-10 space-y-4">
             {channels?.channels && channels.channels.length > 0 ? (
               channels.channels.map((channel) => (
@@ -112,10 +112,10 @@ export default function Home() {
           <NeynarAuthButton className="right-4 top-4" />
 
           <div className="bg-gray-700 p-4 rounded-lg">
-            <h2 className="text-lg font-bold mb-2">Invite friends to Farcaster</h2>
-            <p>Send your friend a link to signup or gift them an invitation to join for free.</p>
+            <h2 className="text-lg font-bold mb-2">Join the Societa Channel</h2>
+            <p>Tweet this and you will receive /societa channel membership.</p>
             <button className="bg-purple-600 mt-4 px-4 py-2 rounded-lg w-full" onClick={handleInvite}>
-              Get Invite Link
+              Join /societa
             </button>
           </div>
         </div>
