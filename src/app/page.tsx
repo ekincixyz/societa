@@ -48,7 +48,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-      })
+      });
 
       if (response.ok) {
         closeModal();
@@ -56,17 +56,17 @@ export default function Home() {
         setSelectedChannel("");
       }
     }
-  }
+  };
 
   const handleInvite = async () => {
     const text = 'Join me on @societaapp the Farcaster client for Solana Builders, find me on the /societa channel!';
 
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
-  }
+  };
 
   return (
-    <div className="flex min-h-screen text-white bg-gray-900">
-      <aside className="w-64 p-4 bg-gray-800 flex flex-col justify-between">
+    <div className="flex flex-col sm:flex-row min-h-screen text-white bg-gray-900">
+      <aside className="sm:w-64 w-full p-4 bg-gray-800 flex flex-col justify-between sm:flex-shrink-0">
         <div className="space-y-6">
           <h1 className="text-xl font-bold">Societa</h1>
           <nav className="mt-10 space-y-4">
@@ -87,11 +87,11 @@ export default function Home() {
         </div>
       </aside>
 
-      <main className="flex-1 p-10">
-        <header className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">Home</h1>
+      <main className="flex-1 p-4 sm:p-10">
+        <header className="flex flex-col sm:flex-row items-center justify-between mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold">Home</h1>
           <button
-            className="bg-purple-600 px-4 py-2 rounded-lg"
+            className="mt-4 sm:mt-0 bg-purple-600 px-4 py-2 rounded-lg"
             onClick={openModal}
           >
             Cast
@@ -106,7 +106,7 @@ export default function Home() {
         </div>
       </main>
 
-      <aside className="w-64 p-4 bg-gray-800 flex flex-col">
+      <aside className="sm:w-64 w-full p-4 bg-gray-800 flex flex-col mt-4 sm:mt-0">
         <div className="space-y-4">
           <NeynarAuthButton className="right-4 top-4" />
 
@@ -122,7 +122,7 @@ export default function Home() {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-gray-800 p-6 rounded-lg w-1/3">
+          <div className="bg-gray-800 p-6 rounded-lg w-full sm:w-1/3">
             <h2 className="text-2xl mb-4">Create a Cast</h2>
 
             {channels?.channels && <div className="mb-4">
