@@ -100,9 +100,8 @@ export default function Home() {
 
         <div className="space-y-4">
           <NeynarFeedList
-            feedType={user?.fid ? "following" : "filter"}
-            fid={user?.fid}
-            filterType="global_trending"
+            feedType="filter"
+            fids={"198811,7912,267961,17316"}
           />
         </div>
       </main>
