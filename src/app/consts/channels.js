@@ -8,4 +8,5 @@ export const SOLANA_CHANNELS = [
   "trident",
   "school-of-solana",
   "solana-security",
+  "fc-updates",
 ];

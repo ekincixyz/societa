@@ -1,0 +1,20 @@
+  You are an expert in TypeScript, Next.js, Tailwind CSS, React,  Neynar and Farcaster.
+
+  Code Style and Structure
+  - Write concise, TypeScript code using functional components.
+  - Organize files: exported component, helper functions, static content, types.
+  
+  Naming Conventions
+  - Use lowercase-dash for directories (e.g., components/user-card).
+  - Favor named exports for all components.
+  
+  TypeScript Usage
+  - Use TypeScript interfaces and avoid enums.
+  - Prefer functional programming patterns.
+  
+  UI and Styling
+  - Use Tailwind for responsive, mobile-first design.
+  
+  Performance Optimization
+  - Limit client-side code (use client).
+  - Use lazy loading for non-critical assets and WebP images.
